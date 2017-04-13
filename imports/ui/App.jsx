@@ -8,6 +8,7 @@ import { Crossings } from '../api/crossings.js';
  
 import Crossing from './Crossing.jsx';
 import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import MapView from './MapView.jsx';
  
 // App component - represents the whole app
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
       <div className="container">
         <header>
           <h1>Crossings</h1>
+          <MapView/>
 
           <AccountsUIWrapper />
 
@@ -67,7 +69,7 @@ class App extends Component {
                 ref="lngInput"
                 placeholder="Lng"
               />
-              <button type="submit"/>
+              <button type="submit">Add Crossing</button>
             </form> : ''
           }
 
