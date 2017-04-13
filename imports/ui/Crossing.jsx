@@ -1,12 +1,13 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import classnames from 'classnames';
  
-// Task component - represents a single todo item
+// Crossing component - represents a single todo item
 export default class Crossing extends Component {
-  setStatus(status) {
+  setStatus(e) {
     // Set the checked property to the opposite of its current value
-    Meteor.call('crossings.setStatus', this.props.crossing._id, status);
+    Meteor.call('crossings.setStatus', this.props.crossing._id, e.target.value);
   }
  
   deleteThisCrossing() {
@@ -15,39 +16,29 @@ export default class Crossing extends Component {
 
   render() {
     const crossingClassName = classnames({
-      status: this.props.task.status,
+      status: this.props.crossing.status,
     });
 
     return (
       <li className={crossingClassName}>
-        <button className="delete" onClick={this.deleteThisTask.bind(this)}>
+        <button className="delete" onClick={this.deleteThisCrossing.bind(this)}>
           &times;
         </button>
  
-        <input
-          type="checkbox"
-          readOnly
-          checked={this.props.task.checked}
-          onClick={this.toggleChecked.bind(this)}
-        />
+        <span className="text">{this.props.crossing.geoJSON}</span>
 
-        { this.props.showPrivateButton ? (
-          <button className="toggle-private" onClick={this.togglePrivate.bind(this)}>
-            { this.props.task.private ? 'Private' : 'Public' }
-          </button>
-        ) : ''}
- 
-        <span className="text">
-          <strong>{this.props.task.username}</strong>: {this.props.task.text}
-        </span>
+        <input
+          type="text"
+          value={this.props.crossing.status}
+          onChange={this.setStatus.bind(this)}
+        />
       </li>
     );
   }
 }
  
-Task.propTypes = {
+Crossing.propTypes = {
   // This component gets the task to display through a React prop.
   // We can use propTypes to indicate it is required
-  task: PropTypes.object.isRequired,
-  showPrivateButton: React.PropTypes.bool.isRequired,
+  crossing: PropTypes.object.isRequired,
 };

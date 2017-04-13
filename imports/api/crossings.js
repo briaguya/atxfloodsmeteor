@@ -16,9 +16,8 @@ if (Meteor.isServer) {
 }
 
 Meteor.methods({
-  'crossings.insert'(geoJSON, status) {
+  'crossings.insert'(geoJSON) {
     // TODO validate the geoJSON against something
-    check(setStatus, String);
  
     // Make sure the user is logged in before adding a crossing
     if (! Meteor.userId()) {
@@ -27,7 +26,7 @@ Meteor.methods({
  
     Crossings.insert({
       geoJSON,
-      status,
+      status: 'open',
       createdAt: new Date(),
       owner: Meteor.userId(),
       username: Meteor.user().username,
@@ -47,7 +46,7 @@ Meteor.methods({
     check(crossingId, String);
     check(setStatus, String);
  
-    const crossing = Tasks.findOne(crossingId);
+    const crossing = Crossings.findOne(crossingId);
     if (crossing.owner !== Meteor.userId()) {
       throw new Meteor.Error('not-authorized');
     }
