@@ -48,7 +48,7 @@ class App extends Component {
       <div className="container">
         <header>
           <h1>Crossings</h1>
-          <MapView/>
+          <MapView crossings={this.props.crossings}/>
 
           <AccountsUIWrapper />
 
