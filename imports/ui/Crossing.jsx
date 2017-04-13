@@ -28,12 +28,11 @@ export default class Crossing extends Component {
         <span className="text">{this.props.crossing.geoJSON.name} - [{this.props.crossing.geoJSON.lat},{this.props.crossing.geoJSON.lng}]</span>
 
         <span className="text">Status:</span>
-        <input
-          className="text"
-          type="text"
-          value={this.props.crossing.status}
-          onChange={this.setStatus.bind(this)}
-        />
+        <select value={this.props.crossing.status} name="status" onChange={this.setStatus.bind(this)}>
+          <option value="blarg"></option>
+          <option value="closed">Closed</option>
+          <option value="open">Open</option>
+        </select>
       </li>
     );
   }
