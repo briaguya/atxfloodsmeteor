@@ -25,9 +25,11 @@ export default class Crossing extends Component {
           &times;
         </button>
  
-        <span className="text">{this.props.crossing.geoJSON}</span>
+        <span className="text">{this.props.crossing.geoJSON.name} - [{this.props.crossing.geoJSON.lat},{this.props.crossing.geoJSON.lng}]</span>
 
+        <span className="text">Status:</span>
         <input
+          className="text"
           type="text"
           value={this.props.crossing.status}
           onChange={this.setStatus.bind(this)}

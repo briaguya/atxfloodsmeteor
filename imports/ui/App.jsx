@@ -19,12 +19,16 @@ class App extends Component {
     event.preventDefault();
  
     // Find the text field via the React ref
-    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
- 
-    Meteor.call('crossings.insert', text);
+    const name = ReactDOM.findDOMNode(this.refs.newCrossingNameInput).value.trim();
+    const lat = ReactDOM.findDOMNode(this.refs.latInput).value.trim();
+    const lng = ReactDOM.findDOMNode(this.refs.lngInput).value.trim();
+    
+    Meteor.call('crossings.insert', {'name': name, 'lat':lat, 'lng':lng});
  
     // Clear form
-    ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    ReactDOM.findDOMNode(this.refs.newCrossingNameInput).value = '';
+    ReactDOM.findDOMNode(this.refs.latInput).value = '';
+    ReactDOM.findDOMNode(this.refs.lngInput).value = '';
   }
 
   renderCrossings() {
@@ -50,9 +54,20 @@ class App extends Component {
             <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
               <input
                 type="text"
-                ref="textInput"
-                placeholder="Type to add new crossing"
+                ref="newCrossingNameInput"
+                placeholder="New Crossing Name"
               />
+              <input
+                type="text"
+                ref="latInput"
+                placeholder="Lat"
+              />
+              <input
+                type="text"
+                ref="lngInput"
+                placeholder="Lng"
+              />
+              <button type="submit"/>
             </form> : ''
           }
 
