@@ -37,8 +37,7 @@ Meteor.methods({
     check(crossingId, String);
  
     const crossing = Crossings.findOne(crossingId);
-    if (crossing.owner !== Meteor.userId()) {
-      // If the task is private, make sure only the owner can delete it
+    if (crossing.owner !== Meteor.userId()) {t
       throw new Meteor.Error('not-authorized');
     }
 
@@ -50,7 +49,6 @@ Meteor.methods({
  
     const crossing = Tasks.findOne(crossingId);
     if (crossing.owner !== Meteor.userId()) {
-      // If the task is private, make sure only the owner can check it off
       throw new Meteor.Error('not-authorized');
     }
  
